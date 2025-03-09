@@ -10,6 +10,11 @@ function getComputerChoice() {
     } else if (computerValue >=4 && computerValue <=6) {
         return "paper";
     } else if (computerValue >=7 && computerValue <=10) {
-        return "scissor";
+        return "scissors";
     }
+}
+
+function getHumanChoice() {
+    let humanValue = prompt("Make your choice! Rock 🪨, Paper 📄 or Scissors ✂️?", "");
+    return humanValue.toLowerCase();
 }
