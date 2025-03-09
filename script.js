@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function generateRandomNumber() {
     return Math.floor((Math.random() * 10) + 1);
 }
@@ -22,15 +19,7 @@ function getHumanChoice() {
     return humanValue.toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice == computerChoice) {
-        alert(`Both players chose ${humanChoice}. It's a draw!`);
-    } else {
-        determineWinner(humanChoice, computerChoice);
-    }
-}
-
-function determineWinner(humanChoice, computerChoice) {
+function determineWinner(humanChoice, computerChoice, humanScore, computerScore) {
     let isComputerWinner = false;
     let isHumanWinner = false;
     switch (humanChoice) {
@@ -60,10 +49,7 @@ function determineWinner(humanChoice, computerChoice) {
             console.log("This is a big whoopsie in the implementation!");
             break;
     }
-    printWinner(humanChoice, computerChoice, isComputerWinner, isHumanWinner);
-}
-
-function printWinner(humanChoice, computerChoice, isComputerWinner, isHumanWinner) {
+    
     if (isComputerWinner === true) {
         alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
         computerScore++;
@@ -73,4 +59,25 @@ function printWinner(humanChoice, computerChoice, isComputerWinner, isHumanWinne
     }
 }
 
-playRound(getHumanChoice(), getComputerChoice());
+function playGame(numberOfRounds) {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
+        if (humanChoice == computerChoice) {
+            alert(`Both players chose ${humanChoice}. It's a draw!`);
+        } else {
+            determineWinner(humanChoice, computerChoice, humanScore, computerScore);
+        }
+    }
+
+    for (let round = 0; round < numberOfRounds; round++) {
+        let humanPick = getHumanChoice();
+        let computerPick = getComputerChoice();
+        playRound(humanPick, computerPick);
+    }
+    console.log(`Human score: ${humanScore}`);
+    console.log(`Computer score: ${computerScore}`);
+}
+
+playGame(5);
