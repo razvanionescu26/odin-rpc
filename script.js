@@ -19,7 +19,7 @@ function getHumanChoice() {
     return humanValue.toLowerCase();
 }
 
-function determineWinner(humanChoice, computerChoice, humanScore, computerScore) {
+function determineRoundWinner(humanChoice, computerChoice) {
     let isComputerWinner = false;
     let isHumanWinner = false;
     switch (humanChoice) {
@@ -52,11 +52,13 @@ function determineWinner(humanChoice, computerChoice, humanScore, computerScore)
     
     if (isComputerWinner === true) {
         alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
-        computerScore++;
+        return "human";
     } else if (isHumanWinner === true) {
         alert(`${humanChoice} beats ${computerChoice}. Human wins!`);
-        humanScore++;
+        return "computer";
     }
+    //also should never reach this, just used to C++
+    return "";
 }
 
 function playGame(numberOfRounds) {
@@ -67,7 +69,23 @@ function playGame(numberOfRounds) {
         if (humanChoice == computerChoice) {
             alert(`Both players chose ${humanChoice}. It's a draw!`);
         } else {
-            determineWinner(humanChoice, computerChoice, humanScore, computerScore);
+            const roundWinner = determineRoundWinner(humanChoice, computerChoice);
+            switch(roundWinner) {
+                case "human":
+                    humanScore++;
+                    break;
+                case "computer":
+                    computerScore++;
+                    break;
+            }
+        }
+    }
+
+    function determineGameWinner(humanScore, computerScore) {
+        if (humanScore > computerScore) {
+            alert(`You are the winner! Score ${humanScore}-${computerScore}`);
+        } else {
+            alert(`The computer wins! Score ${computerScore}-${humanScore}`);
         }
     }
 
@@ -78,6 +96,7 @@ function playGame(numberOfRounds) {
     }
     console.log(`Human score: ${humanScore}`);
     console.log(`Computer score: ${computerScore}`);
+    determineGameWinner(humanScore, computerScore);
 }
 
 playGame(5);
