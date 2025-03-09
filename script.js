@@ -82,7 +82,9 @@ function playGame(numberOfRounds) {
     }
 
     function determineGameWinner(humanScore, computerScore) {
-        if (humanScore > computerScore) {
+        if (humanScore === computerScore) {
+            alert(`It's a draw! Score ${humanScore}-${computerScore}`);
+        } else if (humanScore > computerScore) {
             alert(`You are the winner! Score ${humanScore}-${computerScore}`);
         } else {
             alert(`The computer wins! Score ${computerScore}-${humanScore}`);
