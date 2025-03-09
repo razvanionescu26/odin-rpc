@@ -18,7 +18,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanValue = prompt("Make your choice! Rock 🪨, Paper 📄 or Scissors ✂️?", "");
+    let humanValue = prompt("Make your choice! Rock 🪨, Paper 📄 or Scissors ✂️?");
     return humanValue.toLowerCase();
 }
 
@@ -31,38 +31,45 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function determineWinner(humanChoice, computerChoice) {
+    let isComputerWinner = false;
+    let isHumanWinner = false;
     switch (humanChoice) {
         case "rock":
             if (computerChoice === "paper") {
-                alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
-                computerScore++;
+                isComputerWinner = true;
             } else {
-                alert(`${humanChoice} beats ${computerChoice}. Human wins!`);
-                humanScore++;
+                isHumanWinner = true;
             }
             break;
         case "paper":
             if (computerChoice === "scissors") {
-                alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
-                computerScore++;
+                isComputerWinner = true;
             } else {
-                alert(`${humanChoice} beats ${computerChoice}. Human wins!`);
-                humanScore++;
+                isHumanWinner = true;
             }
             break;
         case "scissors":
             if (computerChoice === "rock") {
-                alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
-                computerScore++;
+                isComputerWinner = true;
             } else {
-                alert(`${humanChoice} beats ${computerChoice}. Human wins!`);
-                humanScore++;
+                isHumanWinner = true;
             }
             break;
         default:
             //should never reach this case
             console.log("This is a big whoopsie in the implementation!");
             break;
+    }
+    printWinner(humanChoice, computerChoice, isComputerWinner, isHumanWinner);
+}
+
+function printWinner(humanChoice, computerChoice, isComputerWinner, isHumanWinner) {
+    if (isComputerWinner === true) {
+        alert(`${computerChoice} beats ${humanChoice}. Computer wins!`);
+        computerScore++;
+    } else if (isHumanWinner === true) {
+        alert(`${humanChoice} beats ${computerChoice}. Human wins!`);
+        humanScore++;
     }
 }
 
